@@ -23,11 +23,29 @@
             <a class="navbar-brand" href="{{ route('livres.index') }}">
                 Bibliothèque
             </a>
+
+            <div class="navbar-nav me-auto">
+                @auth
+                    <a class="nav-link" href="{{ route('auteurs.index') }}">Auteurs</a>
+                    <a class="nav-link" href="{{ route('livres.index') }}">Livres</a>
+                    <a class="nav-link" href="{{ route('etudiants.index') }}">Étudiants</a>
+                    <a class="nav-link" href="{{ route('emprunts.index') }}">Emprunts</a>
+                @endauth
+            </div>
+
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="{{ route('auteurs.index') }}">Auteurs</a>
-                <a class="nav-link" href="{{ route('livres.index') }}">Livres</a>
-                <a class="nav-link" href="{{ route('etudiants.index') }}">Étudiants</a>
-                <a class="nav-link" href="{{ route('emprunts.index') }}">Emprunts</a>
+                @auth
+                    <span class="navbar-text text-white me-3">
+                        Bonjour, {{ Auth::user()->name }}
+                    </span>
+                    <a class="nav-link btn btn-outline-light btn-sm px-3"
+                    href="{{ route('logout') }}">
+                        Déconnexion
+                    </a>
+                @else
+                    <a class="nav-link" href="{{ route('login') }}">Connexion</a>
+                    <a class="nav-link" href="{{ route('register') }}">Inscription</a>
+                @endauth
             </div>
         </div>
     </nav>
